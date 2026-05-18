@@ -36,7 +36,7 @@ tasks.named<Jar>("sourcesJar") {
     }
 }
 tasks.named<Jar>("jar") {
-    from(rootProject.file("LICENSE")) {                          // also fixes #10
+    from(rootProject.file("LICENSE")) {
         rename { "${it}_${findProperty("mod_name").toString()}" }
     }
     manifest {

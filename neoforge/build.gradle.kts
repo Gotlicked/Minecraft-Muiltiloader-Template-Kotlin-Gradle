@@ -108,7 +108,6 @@ tasks.withType<Jar>().configureEach {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
-// ── Maven publishing ──────────────────────────────────────────
 publishing {
     publications {
         register<MavenPublication>("mavenJava") {
