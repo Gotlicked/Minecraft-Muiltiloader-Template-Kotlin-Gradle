@@ -31,14 +31,10 @@ repositories {
 }
 
 tasks.named<Jar>("sourcesJar") {
-    from(rootProject.file("LICENSE")) {
-        rename { "${it}_${findProperty("mod_name").toString()}" }
-    }
+    from(rootProject.file("LICENSE"))
 }
 tasks.named<Jar>("jar") {
-    from(rootProject.file("LICENSE")) {
-        rename { "${it}_${findProperty("mod_name").toString()}" }
-    }
+    from(rootProject.file("LICENSE"))
     manifest {
         attributes(
             "Specification-Title"    to findProperty("mod_name").toString(),
