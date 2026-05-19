@@ -73,7 +73,14 @@ tasks.named<ProcessResources>("processResources") {
         "java_version"                  to findProperty("java_version"),
     )
     inputs.properties(replaceProperties)
-    expand(replaceProperties)
+    filesMatching(listOf(
+        "neoforge.mods.toml",
+        "pack.mcmeta",
+        "fabric.mod.json",
+        "*.mixins.json",
+    )) {
+        expand(replaceProperties)
+    }
     from("src/main/templates")
 }
 

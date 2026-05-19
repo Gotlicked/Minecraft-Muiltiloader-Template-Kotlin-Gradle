@@ -79,7 +79,13 @@ tasks.named<JavaCompile>("compileJava") {
 tasks.named<ProcessResources>("processResources") {
     dependsOn(commonResources)
     from(commonResources)
-    expand(project.properties)
+    filesMatching(listOf(
+        "META-INF/neoforge.mods.toml",
+        "pack.mcmeta",
+        "*.mixins.json",
+    )) {
+        expand(project.properties)
+    }
     from("src/main/templates")
 }
 

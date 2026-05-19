@@ -76,7 +76,13 @@ tasks.named<JavaCompile>("compileJava") {
 tasks.named<ProcessResources>("processResources") {
     dependsOn(commonResources)
     from(commonResources)
-    expand(project.properties)
+    filesMatching(listOf(
+        "pack.mcmeta",
+        "fabric.mod.json",
+        "*.mixins.json",
+    )) {
+        expand(project.properties)
+    }
     from("src/main/templates")
 }
 
