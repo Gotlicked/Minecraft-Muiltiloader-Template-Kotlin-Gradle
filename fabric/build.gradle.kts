@@ -5,7 +5,7 @@ plugins {
 }
 
 base {
-    archivesName = "${property("mod_id")}-${project.name}-${property("minecraft_version")}"
+    archivesName = "${property("mod_id")}-${project.name}-${property("minecraft_version")}${property("mod_version")}"
 }
 
 java {
@@ -95,12 +95,29 @@ tasks.named<Jar>("sourcesJar") {
     dependsOn(commonJava, commonResources)
     from(commonJava)
     from(commonResources)
+    from(rootProject.file("LICENSE")) {
+        rename{ it }
+    }
 }
 
 tasks.named<Jar>("jar") {
     dependsOn(commonJava, commonResources)
     from(commonJava)
     from(commonResources)
+    from(rootProject.file("LICENSE")) {
+        rename{ it }
+    }
+    manifest {
+        attributes(
+            "Specification-Title"    to findProperty("mod_name").toString(),
+            "Specification-Vendor"   to findProperty("mod_author").toString(),
+            "Specification-Version"  to findProperty("mod_version").toString(),
+            "Implementation-Title"   to findProperty("mod_id").toString(),
+            "Implementation-Version" to findProperty("mod_version").toString(),
+            "Implementation-Vendor"  to findProperty("mod_author").toString(),
+            "Built-On-Minecraft"     to findProperty("minecraft_version").toString(),
+        )
+    }
 }
 
 tasks.withType<Copy>().configureEach {
